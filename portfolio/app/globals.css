@@ -1,0 +1,82 @@
+/* Google Fonts Import - MUST BE FIRST */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light Theme - Modern Minimalist (Cyan) */
+    --bg-primary: 250 250 250;
+    --bg-secondary: 245 245 245;
+    --bg-card: 255 255 255;
+    --text-primary: 23 23 23;
+    --text-secondary: 82 82 82;
+    --text-muted: 163 163 163;
+    --accent-primary: 14 165 233;
+    --accent-secondary: 2 132 199;
+    --accent-light: 6 182 212;
+    --border: 229 229 229;
+    --border-hover: 212 212 212;
+
+    /* Font Variables */
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  .dark {
+    /* Dark Theme - Modern Minimalist (Cyan) */
+    --bg-primary: 10 10 10;
+    --bg-secondary: 23 23 23;
+    --bg-card: 28 28 28;
+    --text-primary: 250 250 250;
+    --text-secondary: 163 163 163;
+    --text-muted: 115 115 115;
+    --accent-primary: 34 211 238;
+    --accent-secondary: 6 182 212;
+    --accent-light: 103 232 249;
+    --border: 38 38 38;
+    --border-hover: 64 64 64;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-[rgb(var(--bg-primary))] text-[rgb(var(--text-primary))] antialiased;
+    font-family: var(--font-body);
+  }
+
+  /* All headings use Playfair Display */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+
+  /* Custom selection */
+  ::selection {
+    background: rgba(var(--accent-primary), 0.2);
+    color: rgb(var(--text-primary));
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--bg-secondary));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--accent-primary), 0.3);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--accent-primary), 0.5);
+}
