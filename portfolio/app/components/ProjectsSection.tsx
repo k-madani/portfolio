@@ -1,57 +1,66 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { Github } from 'lucide-react';
 import { useState } from 'react';
 
 interface Project {
   title: string;
-  description: string;
   tags: string[];
-  image: string;
-  liveUrl?: string;
-  year: string;
+  gif: string;
   index: string;
+  problem: string;
+  solution: string;
+  links: {
+    github?: string;
+  };
 }
 
 const projects: Project[] = [
   {
     title: 'Real-Time Auction Platform',
-    description:
-      'A modern e-commerce solution with real-time inventory, AI-powered recommendations, and seamless checkout experience.',
     tags: ['Java', 'Spring Boot', 'PostgreSQL', 'WebSockets'],
-    image: 'https://images.unsplash.com/photo-1661956602116-aa6865609028?w=800&auto=format&fit=crop&q=60',
-    liveUrl: '#',
-    year: '2024',
+    gif: 'https://images.unsplash.com/photo-1661956602116-aa6865609028?w=800&auto=format&fit=crop&q=60',
     index: '01',
+    problem: 'Traditional auctions lacked real-time bidding capabilities and instant price updates for multiple concurrent users.',
+    solution: 'Built WebSocket-based bidding system with Spring Boot backend, achieving sub-200ms bid processing with support for 500+ concurrent users and zero bid conflicts.',
+    links: {
+      github: '#',
+    },
   },
   {
     title: 'ContentFlow',
-    description: 'Real-time analytics dashboard with interactive charts and customizable widgets.',
-    tags: ['Crew AI', 'Flask API', 'Vite'],
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=60',
-    liveUrl: '#',
-    year: '2023',
+    tags: ['CrewAI', 'Flask API', 'Vite', 'RAG'],
+    gif: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=60',
     index: '02',
+    problem: 'Content creation required hours of manual work across research, writing, editing, and SEO optimization.',
+    solution: 'Developed multi-agent AI system using CrewAI that reduced content generation time from 4 hours to 5 minutes with 97% quality acceptance rate at zero operational cost.',
+    links: {
+      github: '#',
+    },
   },
   {
     title: 'Budgetly',
-    description: 'Secure and intuitive mobile banking experience with biometric authentication.',
     tags: ['Django', 'Next.js', 'PostgreSQL'],
-    image: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=800&auto=format&fit=crop&q=60',
-    liveUrl: '#',
-    year: '2023',
+    gif: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=800&auto=format&fit=crop&q=60',
     index: '03',
+    problem: 'Users struggled to track expenses and understand spending patterns without manual categorization.',
+    solution: 'Created finance tracker with JWT authentication and automated category assignment that processes 1000+ transactions in under 2 seconds with 80% categorization accuracy.',
+    links: {
+      github: '#',
+    },
   },
   {
     title: 'WordArena',
-    description: 'AI-powered content creation tool for marketers and content creators.',
     tags: ['MongoDB', 'Express', 'React', 'Node.js'],
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=60',
-    liveUrl: '#',
-    year: '2024',
+    gif: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=60',
     index: '04',
-  }
+    problem: 'Classic word games lacked real-time multiplayer capabilities and engaging competitive features.',
+    solution: 'Built multiplayer hangman game using MERN stack with WebSocket and Redis, supporting 100+ concurrent games with sub-100ms response time.',
+    links: {
+      github: '#',
+    },
+  },
 ];
 
 export default function ProjectsSection() {
@@ -89,7 +98,7 @@ export default function ProjectsSection() {
             viewport={{ once: true }}
             className="text-[rgb(var(--text-secondary))] max-w-md text-lg leading-relaxed"
           >
-            A curated selection of projects that showcase my expertise in creating bold digital experiences.
+            Real systems solving real problems. Each project demonstrates my ability to design, build, and ship production-ready solutions.
           </motion.p>
         </motion.div>
 
@@ -106,84 +115,102 @@ export default function ProjectsSection() {
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              <a href={project.liveUrl} className="block">
-                <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-12">
-                  {/* Index */}
-                  <span className="text-sm text-[rgb(var(--text-secondary))] font-medium tracking-widest">
-                    {project.index}
-                  </span>
+              {/* Project Row */}
+              <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
+                {/* Index */}
+                <span className="text-sm text-[rgb(var(--text-secondary))] font-medium tracking-widest">
+                  {project.index}
+                </span>
 
-                  {/* Title */}
-                  <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold flex-1 text-[rgb(var(--text-primary))] group-hover:text-[rgb(var(--accent-primary))] transition-colors duration-300">
-                    {project.title}
-                  </h3>
+                {/* Title */}
+                <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold flex-1 text-[rgb(var(--text-primary))] group-hover:text-[rgb(var(--accent-primary))] transition-colors duration-300">
+                  {project.title}
+                </h3>
 
-                  {/* Tags */}
-                  <div className="hidden lg:flex items-center gap-3">
-                    {project.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs font-medium px-3 py-1.5 border border-[rgb(var(--accent-primary))]/30 text-[rgb(var(--text-secondary))] rounded-none"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Year */}
-                  <span className="text-sm text-[rgb(var(--text-secondary))] font-medium">{project.year}</span>
-
-                  {/* Arrow */}
-                  <motion.div
-                    className="w-14 h-14 border-2 border-[rgb(var(--accent-primary))]/30 flex items-center justify-center group-hover:bg-[rgb(var(--accent-primary))] group-hover:border-[rgb(var(--accent-primary))] transition-all duration-300 text-[rgb(var(--text-primary))] group-hover:text-white"
-                    animate={{ rotate: hoveredIndex === index ? 45 : 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <ArrowUpRight className="w-6 h-6" />
-                  </motion.div>
-                </div>
-
-                {/* Expandable content on hover */}
-                <motion.div
-                  className="overflow-hidden"
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{
-                    height: hoveredIndex === index ? 'auto' : 0,
-                    opacity: hoveredIndex === index ? 1 : 0,
-                  }}
-                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <div className="grid md:grid-cols-2 gap-8 pt-8 md:pt-12">
-                    <motion.div
-                      className="aspect-video overflow-hidden"
-                      initial={{ scale: 0.95 }}
-                      animate={{ scale: hoveredIndex === index ? 1 : 0.95 }}
-                      transition={{ duration: 0.4 }}
+                {/* All Tags */}
+                <div className="flex flex-wrap items-center gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs font-medium px-3 py-1.5 border border-[rgb(var(--accent-primary))]/30 text-[rgb(var(--text-secondary))]"
                     >
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                      />
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Expandable content on hover */}
+              <motion.div
+                className="overflow-hidden"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{
+                  height: hoveredIndex === index ? 'auto' : 0,
+                  opacity: hoveredIndex === index ? 1 : 0,
+                }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div className="pt-12">
+                  {/* GIF and Details Grid */}
+                  <div className="grid lg:grid-cols-2 gap-12">
+                    {/* Left - GIF Only */}
+                    <motion.div
+                      initial={{ scale: 0.95, opacity: 0 }}
+                      animate={{ 
+                        scale: hoveredIndex === index ? 1 : 0.95,
+                        opacity: hoveredIndex === index ? 1 : 0
+                      }}
+                      transition={{ duration: 0.5, delay: 0.1 }}
+                    >
+                      <div className="aspect-video overflow-hidden">
+                        <img
+                          src={project.gif}
+                          alt={project.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
                     </motion.div>
-                    <div className="flex flex-col justify-center">
-                      <p className="text-[rgb(var(--text-secondary))] text-lg leading-relaxed mb-6">
-                        {project.description}
-                      </p>
-                      <div className="flex flex-wrap gap-2 lg:hidden">
-                        {project.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-xs font-medium px-3 py-1.5 border border-[rgb(var(--accent-primary))]/30 text-[rgb(var(--text-secondary))] rounded-none"
+
+                    {/* Right - Problem + Solution */}
+                    <div className="space-y-8">
+                      {/* Problem */}
+                      <div className="border-l-4 border-[rgb(var(--accent-primary))] pl-6">
+                        <h4 className="text-sm font-bold uppercase tracking-widest text-[rgb(var(--text-primary))] mb-3">
+                          Problem
+                        </h4>
+                        <p className="text-[rgb(var(--text-secondary))] leading-relaxed">
+                          {project.problem}
+                        </p>
+                      </div>
+
+                      {/* Solution with metrics */}
+                      <div className="border-l-4 border-[rgb(var(--accent-primary))] pl-6">
+                        <h4 className="text-sm font-bold uppercase tracking-widest text-[rgb(var(--text-primary))] mb-3">
+                          Solution
+                        </h4>
+                        <p className="text-[rgb(var(--text-secondary))] leading-relaxed">
+                          {project.solution}
+                        </p>
+                      </div>
+
+                      {/* GitHub Link Only */}
+                      <div className="pt-4">
+                        {project.links.github && (
+                          
+                          <a href={project.links.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-6 py-3 border-2 border-[rgb(var(--accent-primary))] text-[rgb(var(--accent-primary))] font-semibold hover:bg-[rgb(var(--accent-primary))]/5 transition-colors"
                           >
-                            {tag}
-                          </span>
-                        ))}
+                            <Github className="w-4 h-4" />
+                            View on GitHub
+                          </a>
+                        )}
                       </div>
                     </div>
                   </div>
-                </motion.div>
-              </a>
+                </div>
+              </motion.div>
             </motion.article>
           ))}
         </div>

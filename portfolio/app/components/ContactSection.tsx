@@ -80,8 +80,8 @@ export default function ContactSection() {
                 <p className="text-xs text-[rgb(var(--text-secondary))] uppercase tracking-widest mb-3 font-semibold">
                   Email
                 </p>
-                
-                  < a href="mailto:madanik0199@gmail.com"
+                <a 
+                  href="mailto:madanik0199@gmail.com"
                   className="text-2xl md:text-3xl font-bold text-[rgb(var(--text-primary))] hover:text-[rgb(var(--accent-primary))] transition-colors inline-block"
                 >
                   madanik0199@gmail.com
@@ -92,8 +92,11 @@ export default function ContactSection() {
                 <p className="text-xs text-[rgb(var(--text-secondary))] uppercase tracking-widest mb-3 font-semibold">
                   Location
                 </p>
-                <p className="text-2xl md:text-3xl font-bold text-[rgb(var(--text-primary))]">
+                <p className="text-2xl md:text-3xl font-bold text-[rgb(var(--text-primary))] mb-2">
                   Boston, MA
+                </p>
+                <p className="text-sm text-[rgb(var(--text-secondary))]">
+                  Open to relocation across the US
                 </p>
               </div>
 

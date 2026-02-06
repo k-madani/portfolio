@@ -7,8 +7,8 @@ import { ArrowDown } from 'lucide-react';
 const roles = [
   'Software Developer',
   'Full Stack Developer',
-  'Backend Engineer',
-  'Cloud Engineer',
+  'Backend Developer',
+  'Cloud Developer',
 ];
 
 export default function Hero() {
@@ -47,7 +47,7 @@ export default function Hero() {
             className="flex-1 lg:pr-8 z-10"
           >
             {/* Name */}
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 text-[rgb(var(--text-primary))] tracking-tight leading-tight">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-xl lg:text-7xl font-bold mb-4 sm:mb-6 text-[rgb(var(--text-primary))] tracking-tight leading-tight">
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -78,7 +78,7 @@ export default function Hero() {
               transition={{ delay: 0.3, duration: 0.8 }}
               className="text-sm sm:text-base md:text-lg text-[rgb(var(--text-secondary))] mb-10 leading-relaxed max-w-2xl"
             >
-              
+            Building scalable systems from code to cloud. Every solution starts with clear thinking and a shot of espresso.
             </motion.p>
 
             {/* CTA Buttons */}
