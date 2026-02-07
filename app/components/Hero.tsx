@@ -38,16 +38,16 @@ export default function Hero() {
 
       {/* Content */}
       <div className="w-full max-w-7xl mx-auto">
-        <div className="relative flex flex-col lg:flex-row items-center lg:items-start">
+        <div className="relative flex flex-col lg:flex-row items-center lg:items-start lg:gap-8">
           {/* Left - Text Content */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="flex-1 lg:pr-8 z-10"
+            className="flex-1 z-10"
           >
             {/* Name */}
-            <h1 className="font-display text-4xl sm:text-5xl md:text-xl lg:text-7xl font-bold mb-4 sm:mb-6 text-[rgb(var(--text-primary))] tracking-tight leading-tight">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 text-[rgb(var(--text-primary))] tracking-tight leading-tight">
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -113,12 +113,12 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Right - Portrait with Animated Offset Frames - Overlapping */}
+          {/* Right - Portrait with Animated Offset Frames - Closer Integration */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="relative hidden lg:block lg:-ml-12"
+            className="relative hidden lg:block flex-shrink-0"
           >
             <div className="relative w-80 h-[420px]">
               {/* Animated Frame 1 - Outer */}

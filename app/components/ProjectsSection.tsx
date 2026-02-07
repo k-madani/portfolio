@@ -25,7 +25,7 @@ const projects: Project[] = [
     problem: 'Traditional auctions lacked real-time bidding capabilities and instant price updates for multiple concurrent users.',
     solution: 'Built WebSocket-based bidding system with Spring Boot backend, achieving sub-200ms bid processing with support for 500+ concurrent users and zero bid conflicts.',
     links: {
-      github: '#',
+      github: 'https://github.com/k-madani/realtime-auction',
     },
   },
   {
@@ -36,7 +36,7 @@ const projects: Project[] = [
     problem: 'Content creation required hours of manual work across research, writing, editing, and SEO optimization.',
     solution: 'Developed multi-agent AI system using CrewAI that reduced content generation time from 4 hours to 5 minutes with 97% quality acceptance rate at zero operational cost.',
     links: {
-      github: '#',
+      github: 'https://github.com/k-madani/content-creation',
     },
   },
   {
@@ -47,7 +47,7 @@ const projects: Project[] = [
     problem: 'Users struggled to track expenses and understand spending patterns without manual categorization.',
     solution: 'Created finance tracker with JWT authentication and automated category assignment that processes 1000+ transactions in under 2 seconds with 80% categorization accuracy.',
     links: {
-      github: '#',
+      github: 'https://github.com/k-madani/budget-tracking',
     },
   },
   {
@@ -58,7 +58,7 @@ const projects: Project[] = [
     problem: 'Classic word games lacked real-time multiplayer capabilities and engaging competitive features.',
     solution: 'Built multiplayer hangman game using MERN stack with WebSocket and Redis, supporting 100+ concurrent games with sub-100ms response time.',
     links: {
-      github: '#',
+      github: 'https://github.com/k-madani/word-arena',
     },
   },
 ];
