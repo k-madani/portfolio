@@ -22,10 +22,7 @@ export default function Hero() {
   }, []);
 
   const scrollToNext = () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: 'smooth',
-    });
+    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
   };
 
   return (
@@ -36,17 +33,22 @@ export default function Hero() {
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-[rgb(var(--accent-light))]/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000" />
       </div>
 
-      {/* Content */}
       <div className="w-full max-w-7xl mx-auto">
-        <div className="relative flex flex-col lg:flex-row items-center lg:items-start lg:gap-8">
-          {/* Left - Text Content */}
+        {/* 
+          KEY: items-stretch makes both columns the same height.
+          The LEFT content determines the row height naturally.
+          The RIGHT photo then stretches to fill that same height.
+          No forced min-h on the row — content drives everything.
+        */}
+        <div className="flex flex-col lg:flex-row lg:items-stretch lg:gap-2">
+
+          {/* Left — Text Content */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="flex-1 z-10"
+            className="flex-1 z-10 flex flex-col justify-center"
           >
-            {/* Name */}
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 text-[rgb(var(--text-primary))] tracking-tight leading-tight">
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
@@ -56,8 +58,7 @@ export default function Hero() {
                 Krishna Madani
               </motion.span>
             </h1>
-            
-            {/* Rotating Role */}
+
             <div className="h-12 sm:h-14 md:h-16 mb-8 overflow-hidden">
               <motion.div
                 key={currentRole}
@@ -71,17 +72,15 @@ export default function Hero() {
               </motion.div>
             </div>
 
-            {/* Tagline */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
               className="text-sm sm:text-base md:text-lg text-[rgb(var(--text-secondary))] mb-10 leading-relaxed max-w-2xl"
             >
-            Building scalable systems from code to cloud. Every solution starts with clear thinking and a shot of espresso.
+              Building scalable systems from code to cloud. Every solution starts with clear thinking and a shot of espresso.
             </motion.p>
 
-            {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -113,78 +112,51 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Right - Portrait with Animated Offset Frames - Closer Integration */}
+          {/* Right — Portrait */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="relative hidden lg:block flex-shrink-0"
+            className="relative hidden lg:block flex-shrink-0 self-stretch"
           >
-            <div className="relative w-80 h-[420px]">
+            {/* 
+              w-72 fixed width. h-full fills the row height = left content height.
+              object-cover ensures image fills without distorting.
+            */}
+            <div className="relative w-72 h-full">
               {/* Animated Frame 1 - Outer */}
               <motion.div
-                animate={{ 
-                  x: [0, -10, 0],
-                  y: [0, -10, 0],
-                }}
-                transition={{ 
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
+                animate={{ x: [0, -10, 0], y: [0, -10, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
                 className="absolute inset-0 border-2 border-[rgb(var(--accent-primary))]/40 translate-x-6 translate-y-6"
               />
-
               {/* Animated Frame 2 - Middle */}
               <motion.div
-                animate={{ 
-                  x: [0, 8, 0],
-                  y: [0, 8, 0],
-                }}
-                transition={{ 
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 0.5
-                }}
+                animate={{ x: [0, 8, 0], y: [0, 8, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
                 className="absolute inset-0 border-2 border-[rgb(var(--accent-light))]/50 translate-x-3 translate-y-3"
               />
-
-              {/* Main Image Container */}
+              {/* Main Image */}
               <motion.div
-                animate={{ 
-                  y: [0, -8, 0],
-                }}
-                transition={{ 
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1
-                }}
-                className="relative z-10 w-full h-full overflow-hidden border-3 border-[rgb(var(--accent-primary))] shadow-2xl shadow-[rgb(var(--accent-primary))]/20"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+                className="relative z-10 w-full h-full overflow-hidden border-2 border-[rgb(var(--accent-primary))] shadow-2xl shadow-[rgb(var(--accent-primary))]/20"
               >
                 <img
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=80"
                   alt="Krishna Madani"
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                  className="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-700"
                 />
               </motion.div>
-
-              {/* Animated accent square */}
+              {/* Accent square */}
               <motion.div
-                animate={{ 
-                  rotate: [0, 10, 0],
-                }}
-                transition={{ 
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 0.3
-                }}
+                animate={{ rotate: [0, 10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
                 className="absolute -top-3 -right-3 w-10 h-10 bg-[rgb(var(--accent-primary))] z-0"
               />
             </div>
           </motion.div>
+
         </div>
       </div>
 

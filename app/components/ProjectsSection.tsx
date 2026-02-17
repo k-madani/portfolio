@@ -19,11 +19,11 @@ interface Project {
 const projects: Project[] = [
   {
     title: 'Real-Time Auction Platform',
-    tags: ['Java', 'Spring Boot', 'PostgreSQL', 'WebSockets'],
+    tags: ['Java', 'Spring Boot', 'PostgreSQL', 'WebSockets', 'Vite/React', 'JWT'],
     gif: 'https://images.unsplash.com/photo-1661956602116-aa6865609028?w=800&auto=format&fit=crop&q=60',
     index: '01',
-    problem: 'Traditional auctions lacked real-time bidding capabilities and instant price updates for multiple concurrent users.',
-    solution: 'Built WebSocket-based bidding system with Spring Boot backend, achieving sub-200ms bid processing with support for 500+ concurrent users and zero bid conflicts.',
+    problem: 'High-frequency bids in competitive auctions create race conditions, stale reads and non-deterministic winner resolution under concurrent access.',
+    solution: 'Designed a transactional bidding engine with row-level locking and WebSocket-based live propagation to guarantee single-winner consistency, sub-second updates and anti-sniping protection.',
     links: {
       github: 'https://github.com/k-madani/realtime-auction',
     },
@@ -156,7 +156,7 @@ export default function ProjectsSection() {
                     {/* Left - GIF Only */}
                     <motion.div
                       initial={{ scale: 0.95, opacity: 0 }}
-                      animate={{ 
+                      animate={{
                         scale: hoveredIndex === index ? 1 : 0.95,
                         opacity: hoveredIndex === index ? 1 : 0
                       }}
@@ -196,7 +196,7 @@ export default function ProjectsSection() {
                       {/* GitHub Link Only */}
                       <div className="pt-4">
                         {project.links.github && (
-                          
+
                           <a href={project.links.github}
                             target="_blank"
                             rel="noopener noreferrer"
