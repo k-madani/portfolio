@@ -28,13 +28,14 @@ const projects: Project[] = [
       github: 'https://github.com/k-madani/realtime-auction',
     },
   },
+
   {
     title: 'ContentFlow',
-    tags: ['CrewAI', 'Flask API', 'Vite', 'RAG'],
+    tags: ['CrewAI', 'Python', 'Gemini', 'Groq', 'Flask API', 'Vite'],
     gif: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=60',
     index: '02',
-    problem: 'Content creation required hours of manual work across research, writing, editing, and SEO optimization.',
-    solution: 'Developed multi-agent AI system using CrewAI that reduced content generation time from 4 hours to 5 minutes with 97% quality acceptance rate at zero operational cost.',
+    problem: 'Content creation across research, drafting, editing and SEO is fragmented across tools, leading to slow turnaround and inconsistent quality at scale.',
+    solution: 'Engineered a 5-agent CrewAI pipeline with custom SEO and tone analysis modules, dual-LLM failover and health-checked orchestration to deliver publication-ready articles in 3–5 minutes with high reliability.',
     links: {
       github: 'https://github.com/k-madani/content-creation',
     },
