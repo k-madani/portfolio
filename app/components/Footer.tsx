@@ -25,10 +25,11 @@ export default function Footer() {
           {/* Social links */}
           <div className="flex items-center gap-8">
             {[
-              { name: 'GitHub', href: 'https://github.com/krishnamadani' },
-              { name: 'LinkedIn', href: 'https://linkedin.com/in/krishnamadani' },
-              { name: 'Email', href: 'mailto:madanik0199@gmail.com' }
-            ].map((social, index) => (
+              
+            { name: 'GitHub', href: 'https://github.com/k-madani' },
+            { name: 'LinkedIn', href: 'https://www.linkedin.com/in/krishna-madani/' },
+            { name: 'Email', href: 'mailto:madanik0199@gmail.com' }
+          ].map((social, index) => (
               <motion.a
                 key={social.name}
                 href={social.href}

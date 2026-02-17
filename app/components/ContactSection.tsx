@@ -1,8 +1,8 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import { ArrowRight, Github, Linkedin } from 'lucide-react';
+import { ArrowRight, Github, Linkedin, CheckCircle, XCircle } from 'lucide-react';
 
 interface FormData {
   name: string;
@@ -17,32 +17,78 @@ export default function ContactSection() {
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState('');
+  const [status, setStatus] = useState<'success' | 'error' | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setStatus(null);
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          subject: `Portfolio Contact from ${formData.name}`,
+        }),
+      });
 
-    setSubmitMessage('Message sent successfully! I will get back to you soon.');
-    setFormData({ name: '', email: '', message: '' });
-    setIsSubmitting(false);
+      const data = await res.json();
 
-    setTimeout(() => setSubmitMessage(''), 5000);
+      if (data.success) {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setStatus(null), 5000);
+    }
   };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   return (
     <section id="contact" className="py-16 md:py-24 relative border-t border-[rgb(var(--accent-primary))]/10 px-6 sm:px-8">
+
+      {/* Toast Notification */}
+      <AnimatePresence>
+        {status && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 shadow-lg border
+              ${status === 'success'
+                ? 'bg-[rgb(var(--bg-card))] border-[rgb(var(--accent-primary))]/50 text-[rgb(var(--accent-primary))]'
+                : 'bg-[rgb(var(--bg-card))] border-red-500/50 text-red-400'
+              }`}
+          >
+            {status === 'success'
+              ? <CheckCircle className="w-5 h-5 flex-shrink-0" />
+              : <XCircle className="w-5 h-5 flex-shrink-0" />
+            }
+            <p className="text-sm font-medium">
+              {status === 'success'
+                ? "Message sent! I'll get back to you soon."
+                : "Oops! That didn't go through — try again 🙈"}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="max-w-7xl mx-auto">
         <motion.div
           className="mb-20 md:mb-32"
@@ -80,7 +126,7 @@ export default function ContactSection() {
                 <p className="text-xs text-[rgb(var(--text-secondary))] uppercase tracking-widest mb-3 font-semibold">
                   Email
                 </p>
-                <a 
+                <a
                   href="mailto:madanik0199@gmail.com"
                   className="text-2xl md:text-3xl font-bold text-[rgb(var(--text-primary))] hover:text-[rgb(var(--accent-primary))] transition-colors inline-block"
                 >
@@ -102,8 +148,8 @@ export default function ContactSection() {
 
               <div className="flex gap-6 pt-8">
                 {[
-                  { name: 'GitHub', icon: Github, href: 'https://github.com/krishnamadani' },
-                  { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/in/krishnamadani' },
+                  { name: 'GitHub', icon: Github, href: 'https://github.com/k-madani' },
+                  { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/in/krishna-madani/' },
                 ].map((social, index) => (
                   <motion.a
                     key={social.name}
@@ -132,10 +178,7 @@ export default function ContactSection() {
           >
             <form onSubmit={handleSubmit} className="space-y-8">
               <div>
-                <label
-                  htmlFor="name"
-                  className="block text-xs font-semibold uppercase tracking-widest text-[rgb(var(--text-secondary))] mb-3"
-                >
+                <label htmlFor="name" className="block text-xs font-semibold uppercase tracking-widest text-[rgb(var(--text-secondary))] mb-3">
                   Name
                 </label>
                 <input
@@ -151,10 +194,7 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-xs font-semibold uppercase tracking-widest text-[rgb(var(--text-secondary))] mb-3"
-                >
+                <label htmlFor="email" className="block text-xs font-semibold uppercase tracking-widest text-[rgb(var(--text-secondary))] mb-3">
                   Email
                 </label>
                 <input
@@ -170,10 +210,7 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-xs font-semibold uppercase tracking-widest text-[rgb(var(--text-secondary))] mb-3"
-                >
+                <label htmlFor="message" className="block text-xs font-semibold uppercase tracking-widest text-[rgb(var(--text-secondary))] mb-3">
                   Message
                 </label>
                 <textarea
@@ -188,21 +225,11 @@ export default function ContactSection() {
                 />
               </div>
 
-              {submitMessage && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-4 bg-[rgb(var(--accent-primary))]/10 border border-[rgb(var(--accent-primary))]/30 text-[rgb(var(--accent-primary))] text-sm"
-                >
-                  {submitMessage}
-                </motion.div>
-              )}
-
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                className="group inline-flex items-center gap-6 mt-8"
-                whileHover={{ x: 10 }}
+                className="group inline-flex items-center gap-6 mt-8 disabled:opacity-50 disabled:cursor-not-allowed"
+                whileHover={{ x: isSubmitting ? 0 : 10 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 25 }}
               >
                 <span className="w-16 h-16 border-2 border-[rgb(var(--accent-primary))]/30 flex items-center justify-center group-hover:bg-[rgb(var(--accent-primary))] group-hover:border-[rgb(var(--accent-primary))] transition-all duration-300 text-[rgb(var(--text-primary))] group-hover:text-white">
