@@ -143,10 +143,10 @@ export default function Hero() {
                 className="relative z-10 w-full h-full overflow-hidden border-2 border-[rgb(var(--accent-primary))] shadow-2xl shadow-[rgb(var(--accent-primary))]/20"
               >
                 <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=80"
-                  alt="Krishna Madani"
-                  className="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-700"
-                />
+  src="/profile.jpg"
+  alt="Krishna Madani"
+  className="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-700"
+/>
               </motion.div>
               {/* Accent square */}
               <motion.div

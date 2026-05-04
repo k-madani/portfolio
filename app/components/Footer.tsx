@@ -18,7 +18,7 @@ export default function Footer() {
               Krishna<span className="text-[rgb(var(--accent-primary))]">.</span>
             </a>
             <p className="text-sm text-[rgb(var(--text-secondary))]">
-              © {new Date().getFullYear()} Krishna Madani. All rights reserved.
+              © {new Date().getFullYear()}. All rights reserved.
             </p>
           </motion.div>
 
