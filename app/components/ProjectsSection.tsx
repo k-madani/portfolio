@@ -30,14 +30,14 @@ const projects: Project[] = [
     tags: ['CrewAI', 'Python', 'Gemini', 'Groq', 'FastAPI', 'React'],
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=60',
     problem: 'Content creation across research, drafting, editing and SEO is fragmented across tools, leading to slow turnaround and inconsistent quality at scale.',
-    solution: 'Engineered a 5-agent CrewAI pipeline with custom SEO and tone analysis modules, dual-LLM failover and health-checked orchestration to deliver publication-ready articles in 3–5 minutes with high reliability.',
+    solution: 'Engineered a 5-agent CrewAI pipeline with custom SEO and tone analysis modules, dual-LLM failover and health-checked orchestration to deliver publication-ready articles in 3-5 minutes with high reliability.',
     links: { github: 'https://github.com/k-madani/content-creation' },
   },
   {
     title: 'Budgetly',
     tagline: 'Smart finance tracker with predictive forecasting',
     tags: ['Django', 'Next.js', 'PostgreSQL', 'JWT', 'Chart.js'],
-    image: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=800&auto=format&fit=crop&q=60',
+    image: '/budgetly.gif',
     problem: 'Users struggled to track expenses and understand spending patterns without manual categorization.',
     solution: 'Created finance tracker with JWT authentication and automated category assignment that processes 1000+ transactions in under 2 seconds with 80% categorization accuracy.',
     links: { github: 'https://github.com/k-madani/budget-tracking' },
@@ -57,7 +57,7 @@ const projects: Project[] = [
     tags: ['Python', 'DQN', 'Contextual Bandits', 'NumPy', 'PyTorch'],
     image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format&fit=crop&q=60',
     problem: 'Traditional portfolio management uses static allocation rules that fail during market regime changes, leading to suboptimal risk-adjusted returns.',
-    solution: 'Built a multi-agent RL system combining DQN for capital allocation with Contextual Bandits for stock selection, achieving 210% returns and a 1.931 Sharpe ratio — outperforming equal-weight baseline by 94 percentage points.',
+    solution: 'Built a multi-agent RL system combining DQN for capital allocation with Contextual Bandits for stock selection, achieving 210% returns and a 1.931 Sharpe ratio - outperforming equal-weight baseline by 94 percentage points.',
     links: { github: 'https://github.com/k-madani/rl-investment' },
   },
   {
@@ -66,7 +66,7 @@ const projects: Project[] = [
     tags: ['TypeScript', 'Node.js', 'Express.js', 'Mongoose', 'Material UI'],
     image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&auto=format&fit=crop&q=60',
     problem: 'Budget travellers had no unified platform combining real-time flight alerts, preference-based filtering and a loyalty reward system.',
-    solution: 'Developed a full-stack flight booking app with customizable travel preferences, real-time email notifications, secure payment gateway and a tiered loyalty points system (Voyager → Adventurer).',
+    solution: 'Developed a full-stack flight booking app with customizable travel preferences, real-time email notifications, secure payment gateway and a tiered loyalty points system (Voyager to Adventurer).',
     links: { github: 'https://github.com/k-madani/Voyage' },
   },
 ];
@@ -130,7 +130,7 @@ export default function ProjectsSection() {
           </motion.p>
         </motion.div>
 
-        {/* 2×3 Grid */}
+        {/* 2x3 Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
             <motion.div
@@ -237,19 +237,11 @@ export default function ProjectsSection() {
                   <X className="w-4 h-4" />
                 </button>
 
-                {/* Modal image */}
-                <div className="relative aspect-video overflow-hidden">
-                  <img
-                    src={selectedProject.image}
-                    alt={selectedProject.title}
-                    className="w-full h-full object-cover"
-                  />
-                  {/* Cyan accent bar at bottom of image */}
-                  <div className="absolute bottom-0 left-0 w-full h-0.5 bg-[rgb(var(--accent-primary))]" />
-                </div>
+                {/* Modal content (no image) */}
+                <div className="relative p-8 pt-14">
+                  {/* Cyan accent bar at top */}
+                  <div className="absolute top-0 left-0 w-full h-0.5 bg-[rgb(var(--accent-primary))]" />
 
-                {/* Modal content */}
-                <div className="p-8">
                   {/* Title row with GitHub */}
                   <div className="flex items-start justify-between gap-4 mb-6">
                     <div>
