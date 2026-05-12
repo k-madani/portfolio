@@ -16,12 +16,12 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: 'Real-Time Auction Platform',
+    title: 'AuctionHub',
     tagline: 'Concurrent bidding with guaranteed winner resolution',
     tags: ['Java', 'Spring Boot', 'PostgreSQL', 'WebSockets', 'React', 'JWT'],
     image: 'https://images.unsplash.com/photo-1661956602116-aa6865609028?w=800&auto=format&fit=crop&q=60',
-    problem: 'High-frequency bids in competitive auctions create race conditions, stale reads and non-deterministic winner resolution under concurrent access.',
-    solution: 'Designed a transactional bidding engine with row-level locking and WebSocket-based live propagation to guarantee single-winner consistency, sub-second updates and anti-sniping protection.',
+    problem: 'Concurrent bids in competitive auctions create race conditions, stale reads, and inconsistent winner resolution under load.',
+    solution: 'A transactional bidding engine with pessimistic locking and WebSocket-based live propagation for single-winner consistency, sub-second updates and anti-snipe protection.',
     links: { github: 'https://github.com/k-madani/realtime-auction' },
   },
   {
@@ -37,28 +37,19 @@ const projects: Project[] = [
     title: 'Budgetly',
     tagline: 'Smart finance tracker with predictive forecasting',
     tags: ['Django', 'Next.js', 'PostgreSQL', 'JWT', 'Chart.js'],
-    image: '/budgetly.gif',
-    problem: 'Users struggled to track expenses and understand spending patterns without manual categorization.',
-    solution: 'Created finance tracker with JWT authentication and automated category assignment that processes 1000+ transactions in under 2 seconds with 80% categorization accuracy.',
+    image: '/budgetly.jpg',
+    problem: 'Most budgeting apps surface category totals only at month-end — too late to help users avoid overspending mid-cycle.',
+    solution: 'Auto-categorizes transactions on ingest and projects category-level spending forward using linear regression with confidence intervals. Supports recurring templates, CSV/Excel/PDF export and a gamification layer (points, achievements) to reinforce habits.',
     links: { github: 'https://github.com/k-madani/budget-tracking' },
   },
   {
     title: 'WordArena',
-    tagline: 'Multiplayer word game with real-time rooms',
-    tags: ['MongoDB', 'Express', 'React', 'Node.js', 'Socket.io', 'Redis'],
+    tagline: 'Multiplayer word game with AI-generated content',
+    tags: ['MongoDB', 'Express', 'React', 'Node.js', 'Socket.io', 'Groq'],
     image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=60',
-    problem: 'Classic word games lacked real-time multiplayer capabilities and engaging competitive features.',
-    solution: 'Built multiplayer hangman game using MERN stack with WebSocket and Redis, supporting 100+ concurrent games with sub-100ms response time.',
+    problem: 'Real-time multiplayer needs synchronized state across clients, recovery from mid-match disconnects, and content that stays fresh beyond the first few sessions.',
+    solution: 'Socket.io rooms drive a server-side state machine with progressive hint reveal and disconnect handling. A weekly Groq/Gemini cron job refreshes the word pool. Single-player AI mode included.',
     links: { github: 'https://github.com/k-madani/word-arena' },
-  },
-  {
-    title: 'RL Investment',
-    tagline: 'Adaptive portfolio allocation via multi-agent RL',
-    tags: ['Python', 'DQN', 'Contextual Bandits', 'NumPy', 'PyTorch'],
-    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format&fit=crop&q=60',
-    problem: 'Traditional portfolio management uses static allocation rules that fail during market regime changes, leading to suboptimal risk-adjusted returns.',
-    solution: 'Built a multi-agent RL system combining DQN for capital allocation with Contextual Bandits for stock selection, achieving 210% returns and a 1.931 Sharpe ratio - outperforming equal-weight baseline by 94 percentage points.',
-    links: { github: 'https://github.com/k-madani/rl-investment' },
   },
   {
     title: 'Voyage',
@@ -69,6 +60,15 @@ const projects: Project[] = [
     solution: 'Developed a full-stack flight booking app with customizable travel preferences, real-time email notifications, secure payment gateway and a tiered loyalty points system (Voyager to Adventurer).',
     links: { github: 'https://github.com/k-madani/Voyage' },
   },
+  {
+    title: 'RL Investment',
+    tagline: 'Adaptive portfolio allocation via multi-agent RL',
+    tags: ['Python', 'DQN', 'Contextual Bandits', 'NumPy', 'PyTorch'],
+    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format&fit=crop&q=60',
+    problem: 'Traditional portfolio management uses static allocation rules that fail during market regime changes, leading to suboptimal risk-adjusted returns.',
+    solution: 'Built a multi-agent RL system combining DQN for capital allocation with Contextual Bandits for stock selection, achieving 210% returns and a 1.931 Sharpe ratio - outperforming equal-weight baseline by 94 percentage points.',
+    links: { github: 'https://github.com/k-madani/rl-investment' },
+  }
 ];
 
 export default function ProjectsSection() {
@@ -242,27 +242,27 @@ export default function ProjectsSection() {
                   {/* Cyan accent bar at top */}
                   <div className="absolute top-0 left-0 w-full h-0.5 bg-[rgb(var(--accent-primary))]" />
 
-                  {/* Title row with GitHub */}
-                  <div className="flex items-start justify-between gap-4 mb-6">
-                    <div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-[rgb(var(--text-primary))] mb-2 leading-tight">
+                  {/* Title row with GitHub beside the name */}
+                  <div className="mb-6">
+                    <div className="flex items-center gap-4 mb-2 pr-12">
+                      <h3 className="text-2xl md:text-3xl font-bold text-[rgb(var(--text-primary))] leading-tight">
                         {selectedProject.title}
                       </h3>
-                      <p className="text-sm text-[rgb(var(--text-secondary))]">
-                        {selectedProject.tagline}
-                      </p>
+                      {selectedProject.links.github && (
+                        <a
+                          href={selectedProject.links.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-shrink-0 inline-flex items-center gap-2 text-sm font-medium text-[rgb(var(--text-secondary))] hover:text-[rgb(var(--accent-primary))] transition-colors duration-200"
+                        >
+                          <Github className="w-4 h-4" />
+                          GitHub
+                        </a>
+                      )}
                     </div>
-                    {selectedProject.links.github && (
-                      <a
-                        href={selectedProject.links.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-shrink-0 inline-flex items-center gap-2 text-sm font-medium text-[rgb(var(--text-secondary))] hover:text-[rgb(var(--accent-primary))] transition-colors duration-200"
-                      >
-                        <Github className="w-4 h-4" />
-                        GitHub
-                      </a>
-                    )}
+                    <p className="text-sm text-[rgb(var(--text-secondary))]">
+                      {selectedProject.tagline}
+                    </p>
                   </div>
 
                   {/* Tags */}

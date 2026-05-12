@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Server, Layout, Database } from 'lucide-react';
+import { Server, Layout, Database, Sparkles } from 'lucide-react';
 
 interface SkillCategory {
   title: string;
@@ -13,7 +13,7 @@ const skillsData: SkillCategory[] = [
   {
     title: 'Backend Development',
     icon: Server,
-    skills: ['Java', 'Spring Boot', 'Python', 'Django', 'Node.js', 'Express.js', 'FlaskAPI', 'REST APIs'],
+    skills: ['Java', 'Spring Boot', 'Python', 'Django', 'Flask', 'Node.js', 'Express.js', 'REST APIs', 'WebSockets', 'GraphQL'],
   },
   {
     title: 'Frontend & UI',
@@ -23,7 +23,12 @@ const skillsData: SkillCategory[] = [
   {
     title: 'Cloud & Database',
     icon: Database,
-    skills: ['AWS', 'Azure DevOps', 'Docker', 'CI/CD', 'PostgreSQL', 'MongoDB', 'Git', 'Serverless'],
+    skills: ['AWS', 'Azure DevOps', 'Docker', 'CI/CD', 'Jenkins', 'GitHub Actions', 'Serverless', 'PostgreSQL', 'MongoDB'],
+  },
+  {
+    title: 'AI & GenAI',
+    icon: Sparkles,
+    skills: ['CrewAI', 'LangChain', 'OpenAI', 'Gemini', 'Groq', 'RAG', 'ChromaDB', 'PyTorch', 'MCP', 'Hugging Face'],
   },
 ];
 
@@ -63,23 +68,23 @@ export default function SkillsSection() {
           </motion.p>
         </motion.div>
 
-        {/* Skills Grid */}
-        <div className="grid md:grid-cols-3 gap-8 md:gap-12">
+        {/* Skills Grid - 1 col mobile, 2x2 tablet, single row on desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-6">
           {skillsData.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: categoryIndex * 0.2 }}
+              transition={{ duration: 0.6, delay: categoryIndex * 0.15 }}
               className="relative border-t-2 border-[rgb(var(--accent-primary))] pt-8"
             >
               {/* Icon and Title */}
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-10 h-10 border-2 border-[rgb(var(--accent-primary))] flex items-center justify-center">
-                  <category.icon className="w-5 h-5 text-[rgb(var(--accent-primary))]" />
+              <div className="flex items-center gap-3 lg:gap-2 mb-6">
+                <div className="w-10 h-10 lg:w-9 lg:h-9 border-2 border-[rgb(var(--accent-primary))] flex items-center justify-center flex-shrink-0">
+                  <category.icon className="w-5 h-5 lg:w-4 lg:h-4 text-[rgb(var(--accent-primary))]" />
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold text-[rgb(var(--text-primary))]">
+                <h3 className="text-xl md:text-2xl lg:text-lg font-bold text-[rgb(var(--text-primary))] leading-tight">
                   {category.title}
                 </h3>
               </div>
@@ -92,7 +97,7 @@ export default function SkillsSection() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: categoryIndex * 0.2 + skillIndex * 0.05 }}
+                    transition={{ delay: categoryIndex * 0.15 + skillIndex * 0.04 }}
                     whileHover={{ scale: 1.05 }}
                     className="px-3 py-1.5 text-sm bg-[rgb(var(--accent-primary))]/10 border border-[rgb(var(--accent-primary))]/30 text-[rgb(var(--text-secondary))] hover:text-[rgb(var(--accent-primary))] hover:border-[rgb(var(--accent-primary))] transition-all duration-200"
                   >
