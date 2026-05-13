@@ -26,8 +26,8 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-[80vh] md:min-h-screen flex items-center justify-center px-6 sm:px-8 overflow-hidden pt-24 sm:pt-28 lg:pt-32 pb-16 sm:pb-20">
-      {/* Gradient Background — smaller, less aggressive on mobile */}
+    <section className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center px-6 sm:px-8 overflow-hidden pt-24 sm:pt-28 lg:pt-32 pb-16 sm:pb-20">
+      {/* Gradient Background */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 left-0 w-64 sm:w-80 lg:w-96 h-64 sm:h-80 lg:h-96 bg-[rgb(var(--accent-primary))]/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
         <div className="absolute bottom-0 right-0 w-64 sm:w-80 lg:w-96 h-64 sm:h-80 lg:h-96 bg-[rgb(var(--accent-light))]/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000" />
@@ -36,14 +36,37 @@ export default function Hero() {
       <div className="w-full max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row lg:items-stretch lg:gap-2">
 
+          {/* Mobile-only avatar — round, centered, above text */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="lg:hidden flex justify-center mb-8"
+          >
+            <div className="relative">
+              <motion.div
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                className="absolute -inset-2 rounded-full border-2 border-dashed border-[rgb(var(--accent-primary))]/30"
+              />
+              <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-2 border-[rgb(var(--accent-primary))] shadow-2xl shadow-[rgb(var(--accent-primary))]/20">
+                <img
+                  src="/profile.jpg"
+                  alt="Krishna Madani"
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+            </div>
+          </motion.div>
+
           {/* Left — Text Content */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="flex-1 z-10 flex flex-col justify-center"
+            className="flex-1 z-10 flex flex-col justify-center text-center lg:text-left"
           >
-            <h1 className="font-display text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-2 sm:mb-3 text-[rgb(var(--text-primary))] tracking-tight leading-tight">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-2 sm:mb-3 text-[rgb(var(--text-primary))] tracking-tight leading-tight">
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -53,7 +76,7 @@ export default function Hero() {
               </motion.span>
             </h1>
 
-            {/* Role rotation — tightened container */}
+            {/* Role rotation */}
             <div className="h-10 sm:h-12 md:h-14 lg:h-16 mb-3 sm:mb-4 overflow-hidden">
               <motion.div
                 key={currentRole}
@@ -71,7 +94,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-sm sm:text-base md:text-lg text-[rgb(var(--text-secondary))] mb-5 sm:mb-6 leading-relaxed max-w-2xl"
+              className="text-sm sm:text-base md:text-lg text-[rgb(var(--text-secondary))] mb-5 sm:mb-6 leading-relaxed max-w-2xl mx-auto lg:mx-0"
             >
               Building scalable systems from code to cloud. Every solution starts with clear thinking and a shot of espresso.
             </motion.p>
@@ -80,7 +103,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="flex flex-wrap items-center gap-3 sm:gap-4"
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4"
             >
               <motion.a
                 href="/resume.pdf"
@@ -107,7 +130,7 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Right — Portrait (desktop only) */}
+          {/* Right — Desktop-only framed portrait */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -147,7 +170,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll Indicator — hidden on smallest screens */}
+      {/* Scroll Indicator */}
       <motion.button
         onClick={scrollToNext}
         initial={{ opacity: 0 }}
