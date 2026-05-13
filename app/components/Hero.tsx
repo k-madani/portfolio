@@ -36,7 +36,7 @@ export default function Hero() {
       <div className="w-full max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row lg:items-stretch lg:gap-2">
 
-          {/* Mobile-only avatar — round, centered, above text */}
+          {/* Mobile-only avatar — round, centered, breathing glow */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -44,12 +44,35 @@ export default function Hero() {
             className="lg:hidden flex justify-center mb-8"
           >
             <div className="relative">
+              {/* Breathing glow — outer (larger, slower) */}
               <motion.div
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                className="absolute -inset-2 rounded-full border-2 border-dashed border-[rgb(var(--accent-primary))]/30"
+                animate={{
+                  scale: [1, 1.15, 1],
+                  opacity: [0.3, 0.5, 0.3],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+                className="absolute inset-0 rounded-full bg-[rgb(var(--accent-primary))]/40 blur-2xl"
               />
-              <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-2 border-[rgb(var(--accent-primary))] shadow-2xl shadow-[rgb(var(--accent-primary))]/20">
+              {/* Breathing glow — inner (tighter, slightly out of phase) */}
+              <motion.div
+                animate={{
+                  scale: [1, 1.08, 1],
+                  opacity: [0.4, 0.7, 0.4],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                  delay: 0.8,
+                }}
+                className="absolute inset-0 rounded-full bg-[rgb(var(--accent-light))]/30 blur-xl"
+              />
+              {/* Avatar */}
+              <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-2 border-[rgb(var(--accent-primary))] shadow-2xl shadow-[rgb(var(--accent-primary))]/30">
                 <img
                   src="/profile.jpg"
                   alt="Krishna Madani"
