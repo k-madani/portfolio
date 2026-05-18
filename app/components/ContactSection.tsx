@@ -134,7 +134,7 @@ export default function ContactSection() {
                 </a>
               </div>
 
-              <div>
+              {/* <div>
                 <p className="text-xs text-[rgb(var(--text-secondary))] uppercase tracking-widest mb-3 font-semibold">
                   Location
                 </p>
@@ -144,7 +144,7 @@ export default function ContactSection() {
                 <p className="text-sm text-[rgb(var(--text-secondary))]">
                   Open to relocation across the US
                 </p>
-              </div>
+              </div> */}
 
               <div className="flex gap-6 pt-8">
                 {[
